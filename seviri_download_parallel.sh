@@ -2,9 +2,9 @@
 
 MAX_JOBS=24
 
-start_date="2020-07-05"
+start_date="2021-03-03"
 
-for ((i=0; i<365; i++))
+for ((i=0; i<1400; i++)) #--- Set to run from 2021-03-03 to 2024-12-31
 do
     day=$(date -d "$start_date + $i days" +"%Y-%m-%d")
     day_nodash=${day//-/}
