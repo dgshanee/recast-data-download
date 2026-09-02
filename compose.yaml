@@ -1,0 +1,4 @@
+services:
+  data_tailor: 
+    build: 
+      dockerfile: Dockerfile
