@@ -1,0 +1,44 @@
+apiVersion: runcourier.dev/v1alpha1
+kind: Service
+metadata:
+  name: bash
+  namespace: bash
+  description: 'A courier service: bash'
+  docstring: null
+  labels: {}
+  annotations: {}
+spec:
+  service_config:
+    heartbeat_interval: 30
+    tracing_enabled: true
+  broker:
+    transport: memory
+    max_retries: 5
+  run:
+  - identifier: data-monitor-file-system-poller-watchdog
+    spec:
+      kind: data_monitor
+      name: file_system_poller_watchdog
+      config:
+        path: /incoming
+        hostname: localhost
+  - identifier: job-builder-dummyjobbuilder
+    spec:
+      kind: job_builder
+      name: DummyJobBuilder
+      config: null
+  - identifier: dispatcher-serial-bash
+    spec:
+      kind: dispatcher
+      name: serial_bash
+      config:
+        timeout_seconds: 3600.0
+        log_to_logger: false
+        log_to_file: false
+        log_only_errors: false
+        scan_stderr: false
+        async: true
+        max_workers: 50
+        bash_script: |
+            echo "COURIER_METRIC: downloaded_files 1"
+  allow_implicit_target: true

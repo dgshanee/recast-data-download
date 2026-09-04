@@ -8,3 +8,5 @@ epct_processing/*
 eumdac_search_results.txt
 .env
 .eumdac/credentials
+.eumdac/orders
+.eumdac/.bash_history
