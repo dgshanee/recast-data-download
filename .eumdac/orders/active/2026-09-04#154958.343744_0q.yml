@@ -1,0 +1,26 @@
+chain:
+  format: hrit
+  product: HRSEVIRI
+dirs: false
+file_patterns: null
+onedir: false
+output_dir: /mnt/sat/seviri/europe_hrit/20210301
+products_to_process:
+  MSG4-SEVI-MSG15-0100-NA-20210301091243.998000000Z-NA:
+    col_id: EO:EUM:DAT:MSG:HRSEVIRI
+    customisation: f714e45b
+    server_state: QUEUED
+  MSG4-SEVI-MSG15-0100-NA-20210301092742.435000000Z-NA:
+    col_id: EO:EUM:DAT:MSG:HRSEVIRI
+    customisation: 09ba1622
+    server_state: QUEUED
+  MSG4-SEVI-MSG15-0100-NA-20210301094242.681000000Z-NA:
+    col_id: EO:EUM:DAT:MSG:HRSEVIRI
+    customisation: '21461718'
+    server_state: QUEUED
+  MSG4-SEVI-MSG15-0100-NA-20210301095742.929000000Z-NA:
+    col_id: EO:EUM:DAT:MSG:HRSEVIRI
+    customisation: null
+    server_state: UNSUBMITTED
+query: null
+type: tailor
