@@ -1,4 +1,36 @@
 services:
   data_tailor: 
+    network_mode: host
+    platform: linux/amd64
     build: 
-      dockerfile: Dockerfile
+      dockerfile: data-tailor.Dockerfile
+    volumes: 
+      - eumdac-url:/root/.eumdac
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:40000/api/v1/user_info"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+  download_service:
+    network_mode: host
+    platform: linux/amd64
+    environment:
+      - DATA_RETRIEVAL_MAX_JOBS=${DATA_RETRIEVAL_MAX_JOBS}
+      - DATA_RETRIEVAL_START_DATE=${DATA_RETRIEVAL_START_DATE}
+      - DATA_RETRIEVAL_TIME_SPAN=${DATA_RETRIEVAL_TIME_SPAN}
+    build:
+      args:
+        - EUMDAC_KEY=${EUMDAC_KEY}
+        - EUMDAC_SECRET=${EUMDAC_SECRET}
+      dockerfile: data-retrieval.Dockerfile
+    volumes:
+      - ${DATA_MOUNT_POINT}:/mnt/sat/seviri/europe_hrit
+      - ./scripts:/scripts
+      - eumdac-url:/root/.eumdac
+    depends_on:
+      data_tailor:
+        condition: service_healthy
+volumes:
+  eumdac-url:
+
